@@ -42,7 +42,7 @@ X_test, y_test = create_dataset(test_data)
 model = Sequential()
 
 model.add(Input(shape=(100, 1)))   # Входной слой
-model.add(LSTM(49))
+model.add(GRU(57))
 model.add(Dense(1))  # Один выходной нейрон
 
 # Компиляция модели

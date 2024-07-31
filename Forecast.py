@@ -41,9 +41,8 @@ X_test, y_test = create_dataset(test_data)
 # Создание модели
 model = Sequential()
 
-model.add(Input(shape=100))   # Входной слой
-#Добавление простого полносвязного слоя
-model.add(Dense(99, activation='tanh'))
+model.add(Input(shape=(100, 1)))   # Входной слой
+model.add(SimpleRNN(99))
 model.add(Dense(1))  # Один выходной нейрон
 
 # Компиляция модели

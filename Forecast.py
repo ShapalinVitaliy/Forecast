@@ -5,7 +5,7 @@ import numpy as np
 import time
 
 from keras import Input
-from keras.layers import LSTM, GRU, Bidirectional
+from keras.layers import LSTM, GRU, Bidirectional, Conv1D, MaxPooling1D, Flatten
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import SimpleRNN, Dense
 
@@ -39,12 +39,18 @@ X_train, y_train = create_dataset(train_data)
 X_test, y_test = create_dataset(test_data)
 
 # Создание модели
-model = Sequential()
+model = Sequential([
 
-model.add(Input(shape=(100, 1)))   # Входной слой
-model.add(Bidirectional(GRU(40)))
-model.add(Dense(1))  # Один выходной нейрон
+Input(shape=(100, 1)),  # Входной слой
+# Добавление сверточного слоя
+Conv1D(filters=189, kernel_size=3, activation='tanh'),
+# Добавление слоя подвыборки (пулинг)
+MaxPooling1D(pool_size=2),
 
+Flatten(),
+
+Dense(1) # Один выходной нейрон
+])
 # Компиляция модели
 model.compile(optimizer='adam', loss='mean_squared_error')
 

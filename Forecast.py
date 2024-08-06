@@ -43,8 +43,14 @@ model = Sequential([
 
 Input(shape=(100, 1)),  # Входной слой
 # Добавление сверточного слоя
-Conv1D(filters=189, kernel_size=3, activation='tanh'),
+Conv1D(filters=20, kernel_size=3, activation='tanh'),
 # Добавление слоя подвыборки (пулинг)
+MaxPooling1D(pool_size=2),
+
+Conv1D(filters=35, kernel_size=3, activation='tanh'),
+MaxPooling1D(pool_size=2),
+
+Conv1D(filters=68, kernel_size=3, activation='tanh'),
 MaxPooling1D(pool_size=2),
 
 Flatten(),
